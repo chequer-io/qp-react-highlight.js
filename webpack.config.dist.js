@@ -6,10 +6,9 @@ module.exports = {
     './src/index.js'
   ],
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'commonjs2',
-    library: 'redux-search'
   },
   externals: {
     'highlight.js': {
@@ -22,18 +21,16 @@ module.exports = {
       commonjs2: 'react-dom'
     }
   },
-  plugins: [
-  ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: path.join(__dirname, 'src')
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css?modules&importLoaders=1', 'postcss'],
+        use: ['style-loader', 'css-loader?modules&importLoaders=1', 'postcss-loader'],
         exclude: path.join(__dirname, 'node_modules')
       }
     ]
